@@ -14,6 +14,9 @@ const NAV_ITEMS = [
   { path: '/qualitative', ko: '질적연구', en: 'Qualitative' },
   { path: '/statistics', ko: '통계분석', en: 'Statistics' },
   { path: '/ethics', ko: '연구윤리', en: 'Ethics' },
+  { path: '/quantitative-methods', ko: '양적연구', en: 'Quantitative' },
+  { path: '/qualitative-methods', ko: '질적연구방법', en: 'Qual Methods' },
+  { path: '/ahp', ko: 'AHP', en: 'AHP' },
 ];
 
 export default function Navbar(): ReactElement {

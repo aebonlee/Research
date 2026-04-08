@@ -108,15 +108,15 @@ export default function Home(): ReactElement {
         <div className="container">
           <div className="stats-grid">
             <div className="stat-item">
-              <div className="stat-number">8+</div>
+              <div className="stat-number">11+</div>
               <div className="stat-label">{t('stats.guides')}</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number">48+</div>
+              <div className="stat-number">66+</div>
               <div className="stat-label">{t('stats.topics')}</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number">8</div>
+              <div className="stat-number">11</div>
               <div className="stat-label">{t('stats.categories')}</div>
             </div>
           </div>

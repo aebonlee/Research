@@ -30,6 +30,9 @@ export default function Footer(): ReactElement {
               <li><Link to="/qualitative">{isKo ? '질적연구' : 'Qualitative'}</Link></li>
               <li><Link to="/statistics">{isKo ? '통계분석' : 'Statistics'}</Link></li>
               <li><Link to="/ethics">{isKo ? '연구윤리' : 'Ethics'}</Link></li>
+              <li><Link to="/quantitative-methods">{isKo ? '양적연구방법' : 'Quantitative'}</Link></li>
+              <li><Link to="/qualitative-methods">{isKo ? '질적연구방법' : 'Qual Methods'}</Link></li>
+              <li><Link to="/ahp">{isKo ? 'AHP방법론' : 'AHP'}</Link></li>
             </ul>
           </div>
 
