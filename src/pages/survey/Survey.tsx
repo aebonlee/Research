@@ -11,6 +11,7 @@ const SECTIONS = [
   { id: 'bias', icon: 'fa-mask', ko: '응답 바이어스와 통제', en: 'Response Bias & Control' },
   { id: 'methods', icon: 'fa-tower-broadcast', ko: '조사 방법', en: 'Survey Methods' },
   { id: 'practice', icon: 'fa-list-check', ko: '설문조사 실전 가이드', en: 'Practical Survey Guide' },
+  { id: 'references', icon: 'fa-book', ko: '참고문헌', en: 'References' },
 ];
 
 /* ────────────────────────────────────────────
@@ -709,6 +710,31 @@ function PracticeSection({ isKo }: { isKo: boolean }): ReactElement {
 }
 
 /* ────────────────────────────────────────────
+   Section 7 : References
+   ──────────────────────────────────────────── */
+function ReferencesSection({ isKo }: { isKo: boolean }): ReactElement {
+  return (
+    <>
+      <div className="guide-content-header">
+        <h1>{isKo ? '참고문헌' : 'References'}</h1>
+        <p>{isKo ? '설문조사법 학습에 활용된 주요 참고문헌입니다.' : 'Key references used in the study of survey research.'}</p>
+      </div>
+      <div className="guide-section">
+        <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Dillman, D. A., Smyth, J. D., & Christian, L. M. (2014). <em>Internet, Phone, Mail, and Mixed-Mode Surveys: The Tailored Design Method</em> (4th ed.). John Wiley & Sons.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Fowler, F. J. (2014). <em>Survey Research Methods</em> (5th ed.). SAGE Publications.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Groves, R. M., et al. (2009). <em>Survey Methodology</em> (2nd ed.). John Wiley & Sons.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Krosnick, J. A., & Presser, S. (2010). Question and questionnaire design. In P. V. Marsden & J. D. Wright (Eds.), <em>Handbook of Survey Research</em> (2nd ed., pp. 263-313). Emerald.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Tourangeau, R., Rips, L. J., & Rasinski, K. (2000). <em>The Psychology of Survey Response</em>. Cambridge University Press.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Warner, S. L. (1965). Randomized response: A survey technique for eliminating evasive answer bias. <em>Journal of the American Statistical Association</em>, 60(309), 63-69.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>김해동, 윤태림 (2013). <em>사회조사방법론</em>. 대영문화사.</li>
+        </ul>
+      </div>
+    </>
+  );
+}
+
+/* ────────────────────────────────────────────
    Main Component
    ──────────────────────────────────────────── */
 export default function Survey(): ReactElement {
@@ -770,6 +796,7 @@ export default function Survey(): ReactElement {
             {activeSection === 'bias' && <BiasSection isKo={isKo} />}
             {activeSection === 'methods' && <MethodsSection isKo={isKo} />}
             {activeSection === 'practice' && <PracticeSection isKo={isKo} />}
+            {activeSection === 'references' && <ReferencesSection isKo={isKo} />}
 
             <div className="guide-section-nav">
               <button className="guide-nav-btn prev" onClick={handlePrev} disabled={currentIndex === 0}>

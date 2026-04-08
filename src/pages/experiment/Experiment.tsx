@@ -11,6 +11,7 @@ const SECTIONS = [
   { id: 'control', icon: 'fa-sliders', ko: '통제 기법', en: 'Control Techniques' },
   { id: 'quasi', icon: 'fa-code-branch', ko: '준실험설계와 현장실험', en: 'Quasi-experiments & Field Experiments' },
   { id: 'cases', icon: 'fa-magnifying-glass-chart', ko: '실험연구 사례', en: 'Experimental Research Cases' },
+  { id: 'references', icon: 'fa-book', ko: '참고문헌', en: 'References' },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -776,6 +777,31 @@ function CasesSection({ isKo }: { isKo: boolean }): ReactElement {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Section 7 : References                                            */
+/* ------------------------------------------------------------------ */
+function ReferencesSection({ isKo }: { isKo: boolean }): ReactElement {
+  return (
+    <>
+      <div className="guide-content-header">
+        <h1>{isKo ? '참고문헌' : 'References'}</h1>
+        <p>{isKo ? '실험연구 학습에 활용된 주요 참고문헌입니다.' : 'Key references used in the study of experimental research.'}</p>
+      </div>
+      <div className="guide-section">
+        <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Campbell, D. T., & Stanley, J. C. (1963). <em>Experimental and Quasi-Experimental Designs for Research</em>. Houghton Mifflin.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Shadish, W. R., Cook, T. D., & Campbell, D. T. (2002). <em>Experimental and Quasi-Experimental Designs for Generalized Causal Inference</em>. Houghton Mifflin.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Milgram, S. (1963). Behavioral study of obedience. <em>Journal of Abnormal and Social Psychology</em>, 67(4), 371-378.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Asch, S. E. (1956). Studies of independence and conformity. <em>Psychological Monographs</em>, 70(9), 1-70.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Zimbardo, P. G. (2007). <em>The Lucifer Effect: Understanding How Good People Turn Evil</em>. Random House.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Kirk, R. E. (2013). <em>Experimental Design: Procedures for the Behavioral Sciences</em> (4th ed.). SAGE Publications.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Banerjee, A. V., & Duflo, E. (2011). <em>Poor Economics</em>. PublicAffairs.</li>
+        </ul>
+      </div>
+    </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  Main component                                                    */
 /* ------------------------------------------------------------------ */
 export default function Experiment(): ReactElement {
@@ -839,6 +865,7 @@ export default function Experiment(): ReactElement {
             {activeSection === 'control' && <ControlSection isKo={isKo} />}
             {activeSection === 'quasi' && <QuasiSection isKo={isKo} />}
             {activeSection === 'cases' && <CasesSection isKo={isKo} />}
+            {activeSection === 'references' && <ReferencesSection isKo={isKo} />}
 
             <div className="guide-section-nav">
               <button className="guide-nav-btn prev" onClick={handlePrev} disabled={currentIndex === 0}>

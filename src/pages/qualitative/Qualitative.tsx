@@ -12,6 +12,7 @@ const SECTIONS = [
   { id: 'observation', icon: 'fa-binoculars', ko: '참여관찰', en: 'Participant Observation' },
   { id: 'theory', icon: 'fa-lightbulb', ko: '근거이론과 현상학', en: 'Grounded Theory & Phenomenology' },
   { id: 'analysis', icon: 'fa-tags', ko: '질적자료 분석', en: 'Qualitative Data Analysis' },
+  { id: 'references', icon: 'fa-book', ko: '참고문헌', en: 'References' },
 ];
 
 /* =================================================================
@@ -905,6 +906,32 @@ function AnalysisSection({ isKo }: { isKo: boolean }): ReactElement {
 }
 
 /* =================================================================
+   Section -- References
+   ================================================================= */
+function ReferencesSection({ isKo }: { isKo: boolean }): ReactElement {
+  return (
+    <>
+      <div className="guide-content-header">
+        <h1>{isKo ? '참고문헌' : 'References'}</h1>
+        <p>{isKo ? '질적연구 학습에 활용된 주요 참고문헌입니다.' : 'Key references used in the study of qualitative research.'}</p>
+      </div>
+      <div className="guide-section">
+        <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Creswell, J. W., & Poth, C. N. (2018). <em>Qualitative Inquiry and Research Design: Choosing Among Five Approaches</em> (4th ed.). SAGE Publications.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Strauss, A., & Corbin, J. (1998). <em>Basics of Qualitative Research: Techniques and Procedures for Developing Grounded Theory</em> (2nd ed.). SAGE Publications.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Glaser, B. G., & Strauss, A. L. (1967). <em>The Discovery of Grounded Theory: Strategies for Qualitative Research</em>. Aldine.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Moustakas, C. (1994). <em>Phenomenological Research Methods</em>. SAGE Publications.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Braun, V., & Clarke, V. (2006). Using thematic analysis in psychology. <em>Qualitative Research in Psychology</em>, 3(2), 77-101.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Lincoln, Y. S., & Guba, E. G. (1985). <em>Naturalistic Inquiry</em>. SAGE Publications.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Kvale, S., & Brinkmann, S. (2015). <em>InterViews: Learning the Craft of Qualitative Research Interviewing</em> (3rd ed.). SAGE Publications.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>김영천 (2016). <em>질적연구방법론 I: Bricoleur</em> (3판). 아카데미프레스.</li>
+        </ul>
+      </div>
+    </>
+  );
+}
+
+/* =================================================================
    Main component
    ================================================================= */
 export default function Qualitative(): ReactElement {
@@ -971,6 +998,7 @@ export default function Qualitative(): ReactElement {
             {activeSection === 'observation' && <ObservationSection isKo={isKo} />}
             {activeSection === 'theory' && <TheorySection isKo={isKo} />}
             {activeSection === 'analysis' && <AnalysisSection isKo={isKo} />}
+            {activeSection === 'references' && <ReferencesSection isKo={isKo} />}
 
             {/* ---------- prev / next ---------- */}
             <div className="guide-section-nav">

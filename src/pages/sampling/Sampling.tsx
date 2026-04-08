@@ -11,6 +11,7 @@ const SECTIONS = [
   { id: 'sample-size', icon: 'fa-calculator', ko: '표본크기 결정', en: 'Determining Sample Size' },
   { id: 'error', icon: 'fa-exclamation-triangle', ko: '표본오차와 신뢰구간', en: 'Sampling Error & Confidence Intervals' },
   { id: 'practice', icon: 'fa-clipboard-check', ko: '표본추출 실전', en: 'Sampling in Practice' },
+  { id: 'references', icon: 'fa-book', ko: '참고문헌', en: 'References' },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -781,6 +782,31 @@ function PracticeSection({ isKo }: { isKo: boolean }): ReactElement {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Section 7 - References                                            */
+/* ------------------------------------------------------------------ */
+function ReferencesSection({ isKo }: { isKo: boolean }): ReactElement {
+  return (
+    <>
+      <div className="guide-content-header">
+        <h1>{isKo ? '참고문헌' : 'References'}</h1>
+        <p>{isKo ? '표본추출 학습에 활용된 주요 참고문헌입니다.' : 'Key references used in the study of sampling methods.'}</p>
+      </div>
+      <div className="guide-section">
+        <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Cochran, W. G. (1977). <em>Sampling Techniques</em> (3rd ed.). John Wiley & Sons.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Lohr, S. L. (2022). <em>Sampling: Design and Analysis</em> (3rd ed.). CRC Press.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Thompson, S. K. (2012). <em>Sampling</em> (3rd ed.). John Wiley & Sons.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Levy, P. S., & Lemeshow, S. (2008). <em>Sampling of Populations: Methods and Applications</em> (4th ed.). John Wiley & Sons.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Kish, L. (1995). <em>Survey Sampling</em>. John Wiley & Sons.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>남궁근 (2021). <em>행정조사방법론</em> (제6판). 법문사.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Babbie, E. (2021). <em>The Practice of Social Research</em> (15th ed.). Cengage Learning.</li>
+        </ul>
+      </div>
+    </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  Main component                                                    */
 /* ------------------------------------------------------------------ */
 export default function Sampling(): ReactElement {
@@ -841,6 +867,7 @@ export default function Sampling(): ReactElement {
             {activeSection === 'sample-size' && <SampleSizeSection isKo={isKo} />}
             {activeSection === 'error' && <ErrorSection isKo={isKo} />}
             {activeSection === 'practice' && <PracticeSection isKo={isKo} />}
+            {activeSection === 'references' && <ReferencesSection isKo={isKo} />}
 
             <div className="guide-section-nav">
               <button

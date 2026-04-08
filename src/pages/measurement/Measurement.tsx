@@ -11,6 +11,7 @@ const SECTIONS = [
   { id: 'reliability', icon: 'fa-repeat', ko: '신뢰도', en: 'Reliability' },
   { id: 'validity', icon: 'fa-bullseye', ko: '타당도', en: 'Validity' },
   { id: 'development', icon: 'fa-wrench', ko: '측정도구 개발', en: 'Instrument Development' },
+  { id: 'references', icon: 'fa-book', ko: '참고문헌', en: 'References' },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -703,6 +704,31 @@ function DevelopmentSection({ isKo }: { isKo: boolean }): ReactElement {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Section 7 – References                                             */
+/* ------------------------------------------------------------------ */
+function ReferencesSection({ isKo }: { isKo: boolean }): ReactElement {
+  return (
+    <>
+      <div className="guide-content-header">
+        <h1>{isKo ? '참고문헌' : 'References'}</h1>
+        <p>{isKo ? '측정과 척도 학습에 활용된 주요 참고문헌입니다.' : 'Key references used in the study of measurement and scales.'}</p>
+      </div>
+      <div className="guide-section">
+        <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Stevens, S. S. (1946). On the theory of scales of measurement. <em>Science</em>, 103(2684), 677-680.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>DeVellis, R. F., & Thorpe, C. T. (2022). <em>Scale Development: Theory and Applications</em> (5th ed.). SAGE Publications.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Nunnally, J. C., & Bernstein, I. H. (1994). <em>Psychometric Theory</em> (3rd ed.). McGraw-Hill.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Likert, R. (1932). A technique for the measurement of attitudes. <em>Archives of Psychology</em>, 22(140), 1-55.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Osgood, C. E., Suci, G. J., & Tannenbaum, P. H. (1957). <em>The Measurement of Meaning</em>. University of Illinois Press.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Cronbach, L. J. (1951). Coefficient alpha and the internal structure of tests. <em>Psychometrika</em>, 16(3), 297-334.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>성태제 (2019). <em>현대 기초통계학의 이해와 적용</em>. 학지사.</li>
+        </ul>
+      </div>
+    </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  Main Page Component                                               */
 /* ------------------------------------------------------------------ */
 export default function Measurement(): ReactElement {
@@ -763,6 +789,7 @@ export default function Measurement(): ReactElement {
             {activeSection === 'reliability' && <ReliabilitySection isKo={isKo} />}
             {activeSection === 'validity' && <ValiditySection isKo={isKo} />}
             {activeSection === 'development' && <DevelopmentSection isKo={isKo} />}
+            {activeSection === 'references' && <ReferencesSection isKo={isKo} />}
 
             <div className="guide-section-nav">
               <button className="guide-nav-btn prev" onClick={handlePrev} disabled={currentIndex === 0}>

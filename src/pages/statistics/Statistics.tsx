@@ -11,6 +11,7 @@ const SECTIONS = [
   { id: 't-anova', icon: 'fa-chart-column', ko: 't-검정과 ANOVA', en: 't-test & ANOVA' },
   { id: 'regression', icon: 'fa-arrow-trend-up', ko: '상관분석과 회귀분석', en: 'Correlation & Regression' },
   { id: 'nonparametric', icon: 'fa-chart-bar', ko: '카이제곱과 비모수통계', en: 'Chi-square & Nonparametric Tests' },
+  { id: 'references', icon: 'fa-book', ko: '참고문헌', en: 'References' },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -643,6 +644,32 @@ function NonparametricSection({ isKo }: { isKo: boolean }): ReactElement {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Section 7 — References (참고문헌)                                    */
+/* ------------------------------------------------------------------ */
+function ReferencesSection({ isKo }: { isKo: boolean }): ReactElement {
+  return (
+    <>
+      <div className="guide-content-header">
+        <h1>{isKo ? '참고문헌' : 'References'}</h1>
+        <p>{isKo ? '통계분석 학습에 활용된 주요 참고문헌입니다.' : 'Key references used in the study of statistical analysis.'}</p>
+      </div>
+      <div className="guide-section">
+        <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Field, A. (2024). <em>Discovering Statistics Using IBM SPSS Statistics</em> (6th ed.). SAGE Publications.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Cohen, J. (1988). <em>Statistical Power Analysis for the Behavioral Sciences</em> (2nd ed.). Lawrence Erlbaum Associates.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Tabachnick, B. G., & Fidell, L. S. (2019). <em>Using Multivariate Statistics</em> (7th ed.). Pearson.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Hair, J. F., et al. (2019). <em>Multivariate Data Analysis</em> (8th ed.). Cengage Learning.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Wasserstein, R. L., & Lazar, N. A. (2016). The ASA statement on p-values. <em>The American Statistician</em>, 70(2), 129-133.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Siegel, S., & Castellan, N. J. (1988). <em>Nonparametric Statistics for the Behavioral Sciences</em> (2nd ed.). McGraw-Hill.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>성태제 (2019). <em>현대 기초통계학의 이해와 적용</em>. 학지사.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>노경섭 (2019). <em>제대로 알고 쓰는 논문 통계분석: SPSS & AMOS</em>. 한빛아카데미.</li>
+        </ul>
+      </div>
+    </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  Main component                                                      */
 /* ------------------------------------------------------------------ */
 export default function Statistics(): ReactElement {
@@ -722,6 +749,7 @@ export default function Statistics(): ReactElement {
             {activeSection === 'nonparametric' && (
               <NonparametricSection isKo={isKo} />
             )}
+            {activeSection === 'references' && <ReferencesSection isKo={isKo} />}
 
             {/* ---------- prev / next nav ---------- */}
             <div className="guide-section-nav">

@@ -15,6 +15,7 @@ const SECTIONS = [
   { id: 'misconduct', icon: 'fa-ban', ko: '연구부정행위', en: 'Research Misconduct' },
   { id: 'conflict', icon: 'fa-handshake-angle', ko: '이해충돌과 저자권', en: 'Conflicts of Interest & Authorship' },
   { id: 'guidelines', icon: 'fa-book-bookmark', ko: '연구윤리 가이드라인', en: 'Research Ethics Guidelines' },
+  { id: 'references', icon: 'fa-book', ko: '참고문헌', en: 'References' },
 ];
 
 /* ================================================================== */
@@ -892,6 +893,33 @@ function GuidelinesSection({ isKo }: { isKo: boolean }): ReactElement {
 }
 
 /* ================================================================== */
+/*  Section 7 — References                                             */
+/* ================================================================== */
+
+function ReferencesSection({ isKo }: { isKo: boolean }): ReactElement {
+  return (
+    <>
+      <div className="guide-content-header">
+        <h1>{isKo ? '참고문헌' : 'References'}</h1>
+        <p>{isKo ? '연구윤리 학습에 활용된 주요 참고문헌입니다.' : 'Key references used in the study of research ethics.'}</p>
+      </div>
+      <div className="guide-section">
+        <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>National Commission for the Protection of Human Subjects (1979). <em>The Belmont Report: Ethical Principles and Guidelines for the Protection of Human Subjects of Research</em>.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>World Medical Association (2013). Declaration of Helsinki: Ethical principles for medical research involving human subjects. <em>JAMA</em>, 310(20), 2191-2194.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Resnik, D. B. (2020). <em>The Ethics of Research with Human Subjects: Protecting People, Advancing Science, Promoting Trust</em>. Springer.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>ICMJE (2023). Recommendations for the Conduct, Reporting, Editing, and Publication of Scholarly Work in Medical Journals.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Steneck, N. H. (2007). <em>ORI Introduction to the Responsible Conduct of Research</em>. U.S. Government Printing Office.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>한국연구재단 (2015). <em>연구윤리 확보를 위한 지침 해설서</em>.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>이인재 (2015). <em>연구윤리의 이해와 실천</em>. 동문사.</li>
+          <li style={{ marginBottom: '12px', lineHeight: 1.8, fontSize: '14px', color: 'var(--text-secondary)' }}>Wilkinson, M. D., et al. (2016). The FAIR Guiding Principles for scientific data management and stewardship. <em>Scientific Data</em>, 3, 160018.</li>
+        </ul>
+      </div>
+    </>
+  );
+}
+
+/* ================================================================== */
 /*  Main page component                                                */
 /* ================================================================== */
 
@@ -959,6 +987,7 @@ export default function Ethics(): ReactElement {
             {activeSection === 'misconduct' && <MisconductSection isKo={isKo} />}
             {activeSection === 'conflict' && <ConflictSection isKo={isKo} />}
             {activeSection === 'guidelines' && <GuidelinesSection isKo={isKo} />}
+            {activeSection === 'references' && <ReferencesSection isKo={isKo} />}
 
             {/* ---------- Section navigation ---------- */}
             <div className="guide-section-nav">
