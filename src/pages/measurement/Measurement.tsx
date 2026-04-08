@@ -1,0 +1,802 @@
+import { useState } from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
+import SEOHead from '../../components/SEOHead';
+import TipBox from '../../components/TipBox';
+import type { ReactElement } from 'react';
+
+const SECTIONS = [
+  { id: 'concept', icon: 'fa-ruler', ko: '측정의 개념', en: 'Concept of Measurement' },
+  { id: 'levels', icon: 'fa-layer-group', ko: '측정 수준', en: 'Levels of Measurement' },
+  { id: 'scales', icon: 'fa-sliders', ko: '척도 유형', en: 'Types of Scales' },
+  { id: 'reliability', icon: 'fa-repeat', ko: '신뢰도', en: 'Reliability' },
+  { id: 'validity', icon: 'fa-bullseye', ko: '타당도', en: 'Validity' },
+  { id: 'development', icon: 'fa-wrench', ko: '측정도구 개발', en: 'Instrument Development' },
+];
+
+/* ------------------------------------------------------------------ */
+/*  Section 1 – Concept of Measurement                                */
+/* ------------------------------------------------------------------ */
+function ConceptSection({ isKo }: { isKo: boolean }): ReactElement {
+  return (
+    <section className="guide-section">
+      <h2 className="guide-section-title">
+        <i className="fa-solid fa-ruler" />
+        {isKo ? '측정의 개념' : 'Concept of Measurement'}
+      </h2>
+
+      {/* What is measurement */}
+      <h3>{isKo ? '측정이란 무엇인가?' : 'What Is Measurement?'}</h3>
+      <p>
+        {isKo
+          ? '사회과학에서 측정(measurement)이란 일정한 규칙에 따라 관찰 대상이나 사건에 숫자(또는 기호)를 부여하는 체계적 과정을 말합니다. 물리적 세계에서는 자(ruler)나 저울(scale)처럼 직접 확인할 수 있는 도구가 있지만, 사회과학에서는 태도, 가치관, 만족도처럼 추상적인 개념을 다루기 때문에 측정이 더욱 복잡하고 정교한 절차를 요구합니다.'
+          : 'In social science, measurement refers to the systematic process of assigning numbers (or symbols) to observations or events according to established rules. While the physical world offers tangible instruments such as rulers and scales, social science deals with abstract concepts like attitudes, values, and satisfaction — making measurement inherently more complex and demanding of rigorous procedures.'}
+      </p>
+      <p>
+        {isKo
+          ? 'Stevens(1946)는 측정을 "규칙에 따라 대상에 수치를 부여하는 과정"이라 정의했습니다. 이 정의는 측정이 단순한 관찰이 아니라, 명확한 규칙(rules)과 체계(system)를 갖춘 활동임을 강조합니다. 좋은 측정은 현상을 정확하게 반영하며, 연구 결과의 신뢰성과 타당성을 좌우합니다.'
+          : 'Stevens (1946) defined measurement as "the assignment of numerals to objects or events according to rules." This definition underscores that measurement is not mere observation but a structured activity governed by explicit rules and systems. Good measurement accurately reflects phenomena and determines the trustworthiness and validity of research findings.'}
+      </p>
+
+      {/* Conceptualization - Operationalization - Measurement */}
+      <h3>{isKo ? '개념화 → 조작화 → 측정' : 'Conceptualization → Operationalization → Measurement'}</h3>
+      <p>
+        {isKo
+          ? '연구에서 추상적 개념을 실제로 측정하기 위해서는 세 단계의 과정을 거칩니다.'
+          : 'To actually measure abstract concepts in research, three sequential stages must be followed.'}
+      </p>
+      <ul>
+        <li>
+          <strong>{isKo ? '개념화(Conceptualization)' : 'Conceptualization'}</strong>:{' '}
+          {isKo
+            ? '연구하고자 하는 추상적 개념의 이론적 의미를 명확히 정의하는 과정입니다. 예를 들어 "삶의 질"이라는 개념이 신체적 건강, 심리적 안녕감, 사회적 관계, 경제적 안정을 포함하는지 범위를 설정합니다.'
+            : 'The process of clearly defining the theoretical meaning of the abstract concept under study. For example, determining whether "quality of life" encompasses physical health, psychological well-being, social relationships, and economic stability.'}
+        </li>
+        <li>
+          <strong>{isKo ? '조작화(Operationalization)' : 'Operationalization'}</strong>:{' '}
+          {isKo
+            ? '추상적 개념을 실제로 관찰·측정 가능한 형태로 변환하는 과정입니다. "직무 만족도"를 "현재 업무에 대한 전반적 만족 정도를 5점 리커트 척도로 응답한 점수"와 같이 구체적 지표로 전환합니다.'
+            : 'The process of converting abstract concepts into observable, measurable forms. For instance, translating "job satisfaction" into "a score on a 5-point Likert scale measuring overall satisfaction with current work tasks."'}
+        </li>
+        <li>
+          <strong>{isKo ? '측정(Measurement)' : 'Measurement'}</strong>:{' '}
+          {isKo
+            ? '조작적 정의에 따라 실제 자료를 수집하고 수치를 부여하는 과정입니다. 설문지, 면접, 관찰, 실험 등 다양한 자료수집 방법이 사용됩니다.'
+            : 'The process of actually collecting data and assigning numerical values according to the operational definition. Various data collection methods are used, including surveys, interviews, observations, and experiments.'}
+        </li>
+      </ul>
+
+      {/* Indicators and Indices */}
+      <h3>{isKo ? '지표(Indicator)와 지수(Index)' : 'Indicators and Indices'}</h3>
+      <p>
+        {isKo
+          ? '지표(indicator)는 추상적 개념을 대표하는 개별 측정 항목입니다. 하나의 개념을 완전히 포착하기 어렵기 때문에, 보통 여러 개의 지표를 사용합니다. 예를 들어, "민주주의 수준"을 측정하기 위해 투표 참여율, 언론 자유 지수, 사법부 독립성 등 다양한 지표를 활용합니다.'
+          : 'An indicator is an individual measurement item that represents an abstract concept. Because a single indicator rarely captures a concept fully, researchers typically employ multiple indicators. For example, measuring "level of democracy" may involve voter turnout, press freedom index, and judicial independence.'}
+      </p>
+      <p>
+        {isKo
+          ? '지수(index)는 여러 지표를 종합하여 하나의 합성 점수로 만든 것입니다. 지수를 구성할 때는 각 지표의 가중치, 합산 방식, 표준화 방법을 신중히 결정해야 합니다.'
+          : 'An index is a composite score created by combining multiple indicators into a single measure. When constructing an index, researchers must carefully decide the weighting of each indicator, the aggregation method, and the standardization procedure.'}
+      </p>
+
+      {/* Observable vs Latent Variables */}
+      <h3>{isKo ? '관측 변수와 잠재 변수' : 'Observable vs. Latent Variables'}</h3>
+      <p>
+        {isKo
+          ? '관측 변수(observed variable)는 직접 관찰하거나 측정할 수 있는 변수입니다(예: 나이, 소득, 시험 점수). 반면, 잠재 변수(latent variable)는 직접 관측할 수 없으며, 여러 관측 변수를 통해 간접적으로 추론하는 변수입니다(예: 지능, 자존감, 조직 몰입). 사회과학 연구에서 관심의 대부분은 잠재 변수에 집중되며, 이를 측정하기 위해 정교한 측정도구와 통계적 모형(예: 요인분석, 구조방정식 모형)이 필요합니다.'
+          : 'Observable variables (also called manifest variables) are directly measurable (e.g., age, income, test scores). In contrast, latent variables cannot be directly observed and must be inferred indirectly through multiple observed variables (e.g., intelligence, self-esteem, organizational commitment). Most social science research focuses on latent variables, requiring sophisticated measurement instruments and statistical models (e.g., factor analysis, structural equation modeling) for their assessment.'}
+      </p>
+
+      {/* Measurement Error */}
+      <h3>{isKo ? '측정 오차' : 'Measurement Error'}</h3>
+      <p>
+        {isKo
+          ? '어떤 측정이든 완벽할 수 없으며, 관측값(X)은 진정한 값(T)과 오차(E)의 합으로 구성됩니다: X = T + E. 측정 오차는 크게 두 가지로 구분됩니다.'
+          : 'No measurement is perfect. An observed score (X) is composed of the true score (T) plus error (E): X = T + E. Measurement error is divided into two major types.'}
+      </p>
+      <ul>
+        <li>
+          <strong>{isKo ? '체계적 오차(Systematic Error)' : 'Systematic Error'}</strong>:{' '}
+          {isKo
+            ? '일정한 방향으로 일관되게 발생하는 오차입니다. 설문 문항이 한쪽으로 편향되어 있거나, 측정 도구의 보정이 잘못된 경우에 나타납니다. 체계적 오차는 타당도(validity)를 위협합니다.'
+            : 'Error that occurs consistently in one direction. It arises when survey items are biased or when a measurement instrument is miscalibrated. Systematic error threatens validity.'}
+        </li>
+        <li>
+          <strong>{isKo ? '무작위 오차(Random Error)' : 'Random Error'}</strong>:{' '}
+          {isKo
+            ? '예측할 수 없는 방향으로 불규칙하게 발생하는 오차입니다. 응답자의 피로, 주변 환경 변화, 기분 등 우연적 요인에 의해 발생하며, 신뢰도(reliability)를 저하시킵니다. 반복 측정을 통해 줄일 수 있습니다.'
+            : 'Error that occurs unpredictably and irregularly. It stems from chance factors such as respondent fatigue, environmental changes, and mood fluctuations. Random error reduces reliability and can be minimized through repeated measurements.'}
+        </li>
+      </ul>
+
+      <TipBox title={isKo ? '조작적 정의의 중요성' : 'Importance of Clear Operationalization'}>
+        <p>
+          {isKo
+            ? '연구에서 가장 흔한 문제 중 하나는 개념의 조작적 정의가 불명확한 것입니다. "스트레스"를 연구한다면, 그것이 생리적 스트레스인지, 심리적 스트레스인지, 직무 스트레스인지 명확히 해야 합니다. 조작적 정의가 모호하면 측정 결과를 해석하기 어렵고, 연구의 재현 가능성도 크게 떨어집니다. 항상 "내가 정확히 무엇을 측정하고 있는가?"라는 질문을 스스로에게 던지십시오.'
+            : 'One of the most common problems in research is unclear operational definitions. If you study "stress," you must specify whether it is physiological stress, psychological stress, or job-related stress. Ambiguous operational definitions make results difficult to interpret and severely reduce the reproducibility of research. Always ask yourself: "What exactly am I measuring?"'}
+        </p>
+      </TipBox>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Section 2 – Levels of Measurement                                 */
+/* ------------------------------------------------------------------ */
+function LevelsSection({ isKo }: { isKo: boolean }): ReactElement {
+  return (
+    <section className="guide-section">
+      <h2 className="guide-section-title">
+        <i className="fa-solid fa-layer-group" />
+        {isKo ? '측정 수준' : 'Levels of Measurement'}
+      </h2>
+
+      <p>
+        {isKo
+          ? 'Stevens(1946)는 측정 수준을 명목, 서열, 등간, 비율의 네 가지로 분류했습니다. 측정 수준은 수집된 자료에 적용할 수 있는 수학적 연산과 통계 기법을 결정하므로, 연구 설계와 분석에서 핵심적인 역할을 합니다.'
+          : 'Stevens (1946) classified measurement into four levels: nominal, ordinal, interval, and ratio. The level of measurement determines which mathematical operations and statistical techniques can be applied to the collected data, making it central to research design and analysis.'}
+      </p>
+
+      {/* Nominal */}
+      <h3>{isKo ? '1. 명목 수준 (Nominal Level)' : '1. Nominal Level'}</h3>
+      <p>
+        {isKo
+          ? '명목 수준은 측정의 가장 기본적인 수준으로, 대상을 상호 배타적인 범주(category)로 분류합니다. 숫자는 단지 이름표(label) 역할을 하며, 순서나 크기의 의미가 없습니다.'
+          : 'The nominal level is the most basic form of measurement, classifying subjects into mutually exclusive categories. Numbers serve merely as labels and carry no meaning of order or magnitude.'}
+      </p>
+      <ul>
+        <li><strong>{isKo ? '예시' : 'Examples'}</strong>: {isKo ? '성별(1=남, 2=여), 종교, 혈액형(A, B, O, AB), 국적' : 'Gender (1=male, 2=female), religion, blood type (A, B, O, AB), nationality'}</li>
+        <li><strong>{isKo ? '허용 연산' : 'Permissible operations'}</strong>: {isKo ? '빈도, 최빈값, 카이제곱 검정' : 'Frequency counts, mode, chi-square test'}</li>
+        <li><strong>{isKo ? '불가능한 연산' : 'Not permissible'}</strong>: {isKo ? '평균, 덧셈/뺄셈, 순서 비교' : 'Mean, addition/subtraction, ordering'}</li>
+      </ul>
+
+      {/* Ordinal */}
+      <h3>{isKo ? '2. 서열 수준 (Ordinal Level)' : '2. Ordinal Level'}</h3>
+      <p>
+        {isKo
+          ? '서열 수준은 범주 간의 순서(rank)가 존재하지만, 범주 간 간격이 동일하지 않은 측정입니다. "더 크다" 또는 "더 작다"라고 말할 수 있지만, "얼마나 더 큰지"는 알 수 없습니다.'
+          : 'The ordinal level has ordered categories, but the intervals between categories are not necessarily equal. We can say "greater than" or "less than," but we cannot determine "how much greater."'}
+      </p>
+      <ul>
+        <li><strong>{isKo ? '예시' : 'Examples'}</strong>: {isKo ? '교육 수준(초졸 < 중졸 < 고졸 < 대졸), 리커트 응답(매우 불만족~매우 만족), 계급(이등병 < 일등병 < 상등병)' : 'Education level (elementary < middle < high school < college), Likert responses (very dissatisfied ~ very satisfied), military rank'}</li>
+        <li><strong>{isKo ? '허용 연산' : 'Permissible operations'}</strong>: {isKo ? '중앙값, 백분위, 순위 상관(Spearman), 비모수 검정' : 'Median, percentile, rank correlation (Spearman), non-parametric tests'}</li>
+        <li><strong>{isKo ? '불가능한 연산' : 'Not permissible'}</strong>: {isKo ? '평균, 표준편차(엄밀히 말하면)' : 'Mean, standard deviation (strictly speaking)'}</li>
+      </ul>
+
+      {/* Interval */}
+      <h3>{isKo ? '3. 등간 수준 (Interval Level)' : '3. Interval Level'}</h3>
+      <p>
+        {isKo
+          ? '등간 수준은 범주 간 간격이 동일하여 차이의 크기를 비교할 수 있지만, 절대 영점(absolute zero)이 없습니다. 따라서 비율 비교(예: "두 배")는 의미가 없습니다.'
+          : 'The interval level has equal intervals between values, allowing comparison of the magnitude of differences, but lacks a true zero point. Therefore, ratio comparisons (e.g., "twice as much") are meaningless.'}
+      </p>
+      <ul>
+        <li><strong>{isKo ? '예시' : 'Examples'}</strong>: {isKo ? '섭씨 온도(0°C는 온도의 부재가 아님), IQ 점수, 연도(calendar year)' : 'Celsius temperature (0°C does not mean absence of temperature), IQ scores, calendar year'}</li>
+        <li><strong>{isKo ? '허용 연산' : 'Permissible operations'}</strong>: {isKo ? '평균, 표준편차, 덧셈/뺄셈, t-검정, 분산분석(ANOVA), 상관분석' : 'Mean, standard deviation, addition/subtraction, t-test, ANOVA, correlation'}</li>
+        <li><strong>{isKo ? '불가능한 연산' : 'Not permissible'}</strong>: {isKo ? '비율 비교(곱셈/나눗셈)' : 'Ratio comparisons (multiplication/division)'}</li>
+      </ul>
+
+      {/* Ratio */}
+      <h3>{isKo ? '4. 비율 수준 (Ratio Level)' : '4. Ratio Level'}</h3>
+      <p>
+        {isKo
+          ? '비율 수준은 절대 영점을 가지며, 모든 수학적 연산이 가능한 가장 높은 수준의 측정입니다. 0은 해당 속성이 완전히 없음을 의미하므로, "A는 B의 두 배"와 같은 비율 비교가 가능합니다.'
+          : 'The ratio level possesses a true zero point and permits all mathematical operations, making it the highest level of measurement. Zero means the complete absence of the attribute, so ratio comparisons like "A is twice B" are meaningful.'}
+      </p>
+      <ul>
+        <li><strong>{isKo ? '예시' : 'Examples'}</strong>: {isKo ? '소득(0원 = 소득 없음), 나이, 체중, 신장, 거리, 시간' : 'Income ($0 = no income), age, weight, height, distance, time'}</li>
+        <li><strong>{isKo ? '허용 연산' : 'Permissible operations'}</strong>: {isKo ? '모든 산술 연산, 기하평균, 변동계수 등' : 'All arithmetic operations, geometric mean, coefficient of variation, etc.'}</li>
+      </ul>
+
+      {/* Comparison Table */}
+      <h3>{isKo ? '측정 수준 비교표' : 'Comparison Table of Measurement Levels'}</h3>
+      <div className="table-responsive">
+        <table className="guide-table">
+          <thead>
+            <tr>
+              <th>{isKo ? '특성' : 'Property'}</th>
+              <th>{isKo ? '명목' : 'Nominal'}</th>
+              <th>{isKo ? '서열' : 'Ordinal'}</th>
+              <th>{isKo ? '등간' : 'Interval'}</th>
+              <th>{isKo ? '비율' : 'Ratio'}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{isKo ? '범주 구분' : 'Classification'}</td>
+              <td>O</td><td>O</td><td>O</td><td>O</td>
+            </tr>
+            <tr>
+              <td>{isKo ? '순서' : 'Order'}</td>
+              <td>X</td><td>O</td><td>O</td><td>O</td>
+            </tr>
+            <tr>
+              <td>{isKo ? '동일 간격' : 'Equal Intervals'}</td>
+              <td>X</td><td>X</td><td>O</td><td>O</td>
+            </tr>
+            <tr>
+              <td>{isKo ? '절대 영점' : 'True Zero'}</td>
+              <td>X</td><td>X</td><td>X</td><td>O</td>
+            </tr>
+            <tr>
+              <td>{isKo ? '대표적 통계' : 'Key Statistics'}</td>
+              <td>{isKo ? '최빈값, χ²' : 'Mode, χ²'}</td>
+              <td>{isKo ? '중앙값, Spearman ρ' : 'Median, Spearman ρ'}</td>
+              <td>{isKo ? '평균, Pearson r' : 'Mean, Pearson r'}</td>
+              <td>{isKo ? '기하평균, CV' : 'Geometric mean, CV'}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <TipBox type="warning" title={isKo ? '서열 변수를 등간으로 취급하는 흔한 실수' : 'Common Mistake: Treating Ordinal as Interval'}>
+        <p>
+          {isKo
+            ? '사회과학 연구에서 리커트 척도(예: 1=전혀 그렇지 않다 ~ 5=매우 그렇다) 응답을 등간 척도로 간주하고 평균을 계산하는 관행이 매우 일반적입니다. 엄밀히 말하면 리커트 응답은 서열 수준이므로, "2와 3의 차이"가 "4와 5의 차이"와 같다고 보장할 수 없습니다. 그러나 항목 수가 충분하고(보통 5개 이상의 문항을 합산) 분포가 정규분포에 가까운 경우, 실무적으로 등간 척도처럼 취급하는 것이 학계에서 널리 수용됩니다. 이 가정을 사용할 때는 논문에 그 근거를 명시하는 것이 좋습니다.'
+            : 'In social science research, it is extremely common to treat Likert scale responses (e.g., 1=strongly disagree to 5=strongly agree) as interval data and compute means. Strictly speaking, Likert responses are ordinal — the difference between 2 and 3 is not guaranteed to equal the difference between 4 and 5. However, when enough items are aggregated (typically 5 or more items summed) and the distribution approximates normality, treating the data as interval is widely accepted in practice. When using this assumption, it is good practice to state the justification in your paper.'}
+        </p>
+      </TipBox>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Section 3 – Types of Scales                                       */
+/* ------------------------------------------------------------------ */
+function ScalesSection({ isKo }: { isKo: boolean }): ReactElement {
+  return (
+    <section className="guide-section">
+      <h2 className="guide-section-title">
+        <i className="fa-solid fa-sliders" />
+        {isKo ? '척도 유형' : 'Types of Scales'}
+      </h2>
+
+      <p>
+        {isKo
+          ? '척도(scale)는 추상적 개념을 체계적으로 측정하기 위해 고안된 도구입니다. 연구 목적과 측정 대상의 특성에 따라 다양한 척도 유형이 활용되며, 각 유형은 고유한 장단점을 가지고 있습니다.'
+          : 'A scale is an instrument designed to measure abstract concepts systematically. Different scale types are employed depending on the research purpose and the characteristics of the construct being measured, each with its own advantages and limitations.'}
+      </p>
+
+      {/* Likert Scale */}
+      <h3>{isKo ? '1. 리커트 척도 (Likert Scale)' : '1. Likert Scale'}</h3>
+      <p>
+        {isKo
+          ? 'Rensis Likert(1932)가 개발한 척도로, 특정 진술문에 대한 동의 정도를 측정합니다. 사회과학에서 가장 널리 사용되는 척도 유형입니다. 응답자는 일반적으로 5점(매우 동의~매우 반대) 또는 7점 척도로 응답하며, 여러 문항의 합산 점수를 통해 태도나 의견을 측정합니다.'
+          : 'Developed by Rensis Likert (1932), this scale measures the degree of agreement with specific statements. It is the most widely used scale type in social science. Respondents typically answer on a 5-point (strongly agree to strongly disagree) or 7-point scale, and attitudes or opinions are measured through summed scores across multiple items.'}
+      </p>
+      <ul>
+        <li><strong>{isKo ? '5점 척도 예시' : '5-point scale example'}</strong>: {isKo ? '1=전혀 그렇지 않다, 2=그렇지 않다, 3=보통이다, 4=그렇다, 5=매우 그렇다' : '1=Strongly Disagree, 2=Disagree, 3=Neutral, 4=Agree, 5=Strongly Agree'}</li>
+        <li><strong>{isKo ? '7점 척도' : '7-point scale'}</strong>: {isKo ? '더 세밀한 응답 차이를 포착할 수 있으며, 통계적으로 정규분포에 가까운 분포를 얻기 용이합니다.' : 'Captures finer response differences and is more likely to produce distributions approximating normality.'}</li>
+        <li><strong>{isKo ? '장점' : 'Strengths'}</strong>: {isKo ? '작성과 응답이 용이하며, 다수의 항목을 합산하여 높은 신뢰도를 확보할 수 있습니다.' : 'Easy to construct and respond to; high reliability achievable by summing multiple items.'}</li>
+      </ul>
+
+      {/* Thurstone Scale */}
+      <h3>{isKo ? '2. 서스톤 척도 (Thurstone Scale)' : '2. Thurstone Scale'}</h3>
+      <p>
+        {isKo
+          ? 'L.L. Thurstone(1928)가 개발한 "등현 간격법(equal-appearing intervals)"에 기반한 척도입니다. 다수의 전문가(심사위원)가 각 문항이 나타내는 태도의 강도를 1~11점으로 평가하고, 심사위원 간 합의가 높은 문항만 선별합니다. 최종 척도에서 응답자는 동의하는 문항만 선택하며, 선택한 문항들의 중앙값이 태도 점수가 됩니다.'
+          : 'Developed by L.L. Thurstone (1928) based on the method of "equal-appearing intervals." A panel of expert judges rates the attitude intensity of each item on a 1–11 scale, and only items with high inter-judge agreement are retained. In the final scale, respondents select only the statements they agree with, and the median value of selected items becomes the attitude score.'}
+      </p>
+      <ul>
+        <li><strong>{isKo ? '장점' : 'Strengths'}</strong>: {isKo ? '문항 간 간격이 이론적으로 동등하여, 등간 수준의 측정에 가깝습니다.' : 'Item intervals are theoretically equal, approximating interval-level measurement.'}</li>
+        <li><strong>{isKo ? '단점' : 'Limitations'}</strong>: {isKo ? '척도 개발에 시간과 비용이 많이 들며, 심사위원의 주관이 개입될 수 있습니다.' : 'Scale development is time-consuming and expensive, and judge subjectivity may influence results.'}</li>
+      </ul>
+
+      {/* Guttman Scale */}
+      <h3>{isKo ? '3. 거트만 척도 (Guttman Scale)' : '3. Guttman Scale'}</h3>
+      <p>
+        {isKo
+          ? 'Louis Guttman(1944)이 개발한 누적 척도(cumulative scale)입니다. 문항들이 강도순으로 배열되어, 특정 문항에 동의하면 그보다 낮은 강도의 모든 문항에도 동의하는 것으로 간주합니다. 스캘로그램 분석(scalogram analysis)을 통해 문항의 누적적 특성을 검증합니다.'
+          : 'Developed by Louis Guttman (1944), this is a cumulative scale. Items are arranged by intensity so that agreeing with a given item implies agreement with all lower-intensity items. Scalogram analysis verifies the cumulative properties of the items.'}
+      </p>
+      <ul>
+        <li><strong>{isKo ? '예시' : 'Example'}</strong>: {isKo ? '"사회적 거리 척도" — 이웃으로 받아들이겠다 → 친구로 받아들이겠다 → 가족으로 받아들이겠다 (점점 강한 수용)' : '"Social distance scale" — Would accept as neighbor → Would accept as friend → Would accept as family member (progressively stronger acceptance)'}</li>
+        <li><strong>{isKo ? '재현 계수(CR)' : 'Coefficient of Reproducibility (CR)'}</strong>: {isKo ? 'CR ≥ 0.90이면 누적 척도의 기준을 충족하는 것으로 봅니다.' : 'CR ≥ 0.90 is considered to meet the criterion for a cumulative scale.'}</li>
+        <li><strong>{isKo ? '단점' : 'Limitations'}</strong>: {isKo ? '완벽한 누적 패턴을 가진 문항을 찾기 어렵고, 일차원적(unidimensional) 개념에만 적용 가능합니다.' : 'Finding items with perfect cumulative patterns is difficult, and it applies only to unidimensional concepts.'}</li>
+      </ul>
+
+      {/* Semantic Differential */}
+      <h3>{isKo ? '4. 의미분별 척도 (Semantic Differential Scale)' : '4. Semantic Differential Scale'}</h3>
+      <p>
+        {isKo
+          ? 'Osgood, Suci, Tannenbaum(1957)이 개발한 척도로, 양극적 형용사 쌍(bipolar adjective pairs) 사이에서 대상에 대한 인식을 측정합니다. 보통 7점 척도를 사용하며, 평가(evaluation), 력(potency), 활동성(activity)의 세 차원으로 의미를 분석합니다.'
+          : 'Developed by Osgood, Suci, and Tannenbaum (1957), this scale measures perceptions of an object using bipolar adjective pairs. Typically employing a 7-point scale, it analyzes meaning along three dimensions: evaluation, potency, and activity.'}
+      </p>
+      <ul>
+        <li><strong>{isKo ? '예시' : 'Example'}</strong>: {isKo ? '좋은 ___:___:___:___:___:___:___ 나쁜 / 강한 ___:___:___:___:___:___:___ 약한 / 능동적 ___:___:___:___:___:___:___ 수동적' : 'Good ___:___:___:___:___:___:___ Bad / Strong ___:___:___:___:___:___:___ Weak / Active ___:___:___:___:___:___:___ Passive'}</li>
+        <li><strong>{isKo ? '활용' : 'Applications'}</strong>: {isKo ? '브랜드 이미지 연구, 정치인 이미지 분석, 조직 문화 평가 등에 널리 사용됩니다.' : 'Widely used in brand image research, political figure image analysis, and organizational culture assessment.'}</li>
+      </ul>
+
+      {/* Visual Analog Scale */}
+      <h3>{isKo ? '5. 시각적 아날로그 척도 (Visual Analog Scale, VAS)' : '5. Visual Analog Scale (VAS)'}</h3>
+      <p>
+        {isKo
+          ? '보통 100mm 길이의 수평선 위에 응답자가 자신의 상태를 표시하는 방식입니다. 양 끝에 극단적인 상태(예: "통증 없음" ~ "최악의 통증")를 배치하고, 응답자가 선 위의 한 지점을 표시합니다. 통증, 피로, 기분 등의 주관적 경험을 측정할 때 자주 사용되며, 특히 의학 및 건강과학 분야에서 많이 활용됩니다.'
+          : 'Respondents mark their state on a horizontal line, typically 100mm long, with extreme states at each end (e.g., "no pain" to "worst possible pain"). Commonly used to measure subjective experiences such as pain, fatigue, and mood, it is especially prevalent in medical and health science research.'}
+      </p>
+      <ul>
+        <li><strong>{isKo ? '장점' : 'Strengths'}</strong>: {isKo ? '연속적인 데이터를 수집할 수 있어, 범주형 척도보다 민감합니다.' : 'Collects continuous data, making it more sensitive than categorical scales.'}</li>
+        <li><strong>{isKo ? '단점' : 'Limitations'}</strong>: {isKo ? '측정 과정이 번거롭고, 온라인 설문에서 구현이 어려울 수 있습니다.' : 'Measurement process can be cumbersome, and implementation in online surveys may be challenging.'}</li>
+      </ul>
+
+      {/* When to use */}
+      <h3>{isKo ? '척도 유형 선택 기준' : 'When to Use Each Scale Type'}</h3>
+      <p>
+        {isKo
+          ? '척도 선택은 연구 목적, 측정 대상의 특성, 응답자의 특성, 실용성 등을 종합적으로 고려해야 합니다. 태도의 강도를 빠르게 파악하려면 리커트 척도, 정밀한 등간 측정이 필요하면 서스톤 척도, 누적적 태도 구조를 확인하려면 거트만 척도, 대상에 대한 다차원적 인식을 파악하려면 의미분별 척도, 주관적 경험의 연속적 변화를 측정하려면 VAS가 적합합니다.'
+          : 'Scale selection should consider research objectives, construct characteristics, respondent characteristics, and practicality. Use Likert scales for quick attitude intensity assessment, Thurstone scales for precise interval measurement, Guttman scales for verifying cumulative attitude structures, semantic differential scales for multidimensional perception analysis, and VAS for measuring continuous changes in subjective experience.'}
+      </p>
+
+      <TipBox title={isKo ? '좋은 리커트 문항 설계 원칙' : 'Principles for Designing Good Likert Items'}>
+        <ul>
+          <li>{isKo ? '한 문항에 하나의 개념만 포함하세요 (이중 질문 금지).' : 'Include only one concept per item (avoid double-barreled questions).'}</li>
+          <li>{isKo ? '긍정 문항과 부정(역코딩) 문항을 적절히 혼합하여 묵종 편향(acquiescence bias)을 방지하세요.' : 'Mix positively and negatively worded (reverse-coded) items to prevent acquiescence bias.'}</li>
+          <li>{isKo ? '모호한 표현("가끔", "보통")을 피하고 구체적으로 작성하세요.' : 'Avoid ambiguous wording ("sometimes," "usually") and be specific.'}</li>
+          <li>{isKo ? '응답자의 교육 수준과 언어 능력에 맞는 쉬운 문장을 사용하세요.' : 'Use simple language appropriate for the respondents\' education level and literacy.'}</li>
+          <li>{isKo ? '중립 응답("보통이다") 포함 여부를 연구 목적에 따라 결정하세요. 중립 응답이 회피용으로 남용될 수 있습니다.' : 'Decide whether to include a neutral option ("neither agree nor disagree") based on research goals — it may be misused as an avoidance response.'}</li>
+        </ul>
+      </TipBox>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Section 4 – Reliability                                           */
+/* ------------------------------------------------------------------ */
+function ReliabilitySection({ isKo }: { isKo: boolean }): ReactElement {
+  return (
+    <section className="guide-section">
+      <h2 className="guide-section-title">
+        <i className="fa-solid fa-repeat" />
+        {isKo ? '신뢰도' : 'Reliability'}
+      </h2>
+
+      {/* What is reliability */}
+      <h3>{isKo ? '신뢰도란 무엇인가?' : 'What Is Reliability?'}</h3>
+      <p>
+        {isKo
+          ? '신뢰도(reliability)란 측정 도구가 동일한 대상을 반복 측정했을 때 일관되고 안정적인 결과를 산출하는 정도를 말합니다. 즉, 측정의 "반복 가능성(repeatability)"과 "일관성(consistency)"을 의미합니다. 신뢰도가 높은 측정 도구는 무작위 오차(random error)가 적다는 것을 의미합니다.'
+          : 'Reliability refers to the degree to which a measurement instrument produces consistent and stable results when measuring the same subject repeatedly. It represents the "repeatability" and "consistency" of measurement. A highly reliable instrument implies minimal random error.'}
+      </p>
+      <p>
+        {isKo
+          ? '고전검사이론(Classical Test Theory)에 따르면, 관측 점수의 분산 중 진점수 분산이 차지하는 비율이 신뢰도입니다: 신뢰도 = 진점수 분산 / 관측 점수 분산. 이론적으로 0~1 사이의 값을 가지며, 1에 가까울수록 신뢰도가 높습니다.'
+          : 'According to Classical Test Theory, reliability is the proportion of observed score variance attributable to true score variance: Reliability = True Score Variance / Observed Score Variance. It theoretically ranges from 0 to 1, with values closer to 1 indicating higher reliability.'}
+      </p>
+
+      {/* Test-Retest */}
+      <h3>{isKo ? '1. 검사-재검사 신뢰도 (Test-Retest Reliability)' : '1. Test-Retest Reliability'}</h3>
+      <p>
+        {isKo
+          ? '동일한 측정 도구를 동일한 집단에 일정 시간 간격을 두고 두 번 실시한 후, 두 결과 간의 상관계수(Pearson r)를 구합니다. 이를 안정성 계수(coefficient of stability)라고도 합니다.'
+          : 'The same instrument is administered to the same group twice with a time interval, and the Pearson correlation coefficient between the two sets of results is calculated. This is also called the coefficient of stability.'}
+      </p>
+      <ul>
+        <li><strong>{isKo ? '적절한 시간 간격' : 'Appropriate time interval'}</strong>: {isKo ? '보통 2~4주. 너무 짧으면 기억 효과(memory effect)가, 너무 길면 실제 변화가 결과에 영향을 줍니다.' : 'Typically 2–4 weeks. Too short risks memory effects; too long risks actual changes influencing results.'}</li>
+        <li><strong>{isKo ? '한계' : 'Limitations'}</strong>: {isKo ? '시간과 비용이 많이 들며, 동일 피험자의 재참여를 확보하기 어렵습니다.' : 'Time-consuming and expensive; difficult to secure the same participants for retesting.'}</li>
+      </ul>
+
+      {/* Internal Consistency */}
+      <h3>{isKo ? '2. 내적 일관성 (Internal Consistency)' : '2. Internal Consistency'}</h3>
+      <p>
+        {isKo
+          ? '한 번의 측정으로 척도를 구성하는 문항들 간의 일관성을 평가하는 방법입니다. 동일한 구성개념을 측정하는 문항들이 서로 높은 상관을 보이는지 확인합니다.'
+          : 'A method of assessing consistency among items within a scale from a single administration. It examines whether items measuring the same construct show high inter-item correlations.'}
+      </p>
+      <p>
+        <strong>{isKo ? 'Cronbach\'s Alpha (크론바흐 알파)' : 'Cronbach\'s Alpha'}</strong>:{' '}
+        {isKo
+          ? '가장 널리 사용되는 내적 일관성 지표입니다. 문항 수와 문항 간 평균 상관관계를 기반으로 계산되며, 가능한 모든 반분(split-half) 신뢰도의 평균에 해당합니다. 일반적으로 α ≥ 0.70을 수용 가능한 기준으로 봅니다.'
+          : 'The most widely used indicator of internal consistency. It is calculated based on the number of items and the average inter-item correlation, and it represents the mean of all possible split-half reliabilities. Generally, α ≥ 0.70 is considered the acceptable threshold.'}
+      </p>
+      <p>
+        <strong>{isKo ? '반분 신뢰도 (Split-Half Reliability)' : 'Split-Half Reliability'}</strong>:{' '}
+        {isKo
+          ? '척도의 문항을 두 반으로 나누어(예: 홀수 문항과 짝수 문항) 각각의 점수 간 상관을 구합니다. Spearman-Brown 공식으로 보정하여 전체 척도의 신뢰도를 추정합니다. 반분 방식에 따라 결과가 달라질 수 있다는 한계가 있어, Cronbach\'s alpha가 더 선호됩니다.'
+          : 'The scale items are split into two halves (e.g., odd-numbered and even-numbered items), and the correlation between the two half-scores is computed. The Spearman-Brown formula adjusts this to estimate full-scale reliability. Because results can vary depending on how items are split, Cronbach\'s alpha is generally preferred.'}
+      </p>
+
+      {/* Inter-Rater Reliability */}
+      <h3>{isKo ? '3. 평가자 간 신뢰도 (Inter-Rater Reliability)' : '3. Inter-Rater Reliability'}</h3>
+      <p>
+        {isKo
+          ? '두 명 이상의 평가자(coder, rater)가 동일한 대상을 독립적으로 평가했을 때 그 결과의 일치도를 측정합니다. 내용분석, 행동 관찰, 구조화 면접 등에서 필수적입니다.'
+          : 'Measures the degree of agreement when two or more raters independently evaluate the same subjects. It is essential in content analysis, behavioral observation, and structured interviews.'}
+      </p>
+      <ul>
+        <li><strong>{isKo ? 'Cohen\'s Kappa (코헨 카파)' : 'Cohen\'s Kappa'}</strong>: {isKo ? '우연 일치(chance agreement)를 보정한 일치도 계수입니다. κ ≥ 0.61이면 실질적(substantial) 일치, κ ≥ 0.81이면 거의 완벽한(almost perfect) 일치로 해석합니다.' : 'An agreement coefficient that corrects for chance agreement. κ ≥ 0.61 indicates substantial agreement, and κ ≥ 0.81 indicates almost perfect agreement.'}</li>
+        <li><strong>{isKo ? '급내상관계수(ICC)' : 'Intraclass Correlation Coefficient (ICC)'}</strong>: {isKo ? '3명 이상의 평가자가 연속형 변수를 평가할 때 사용됩니다.' : 'Used when three or more raters assess continuous variables.'}</li>
+      </ul>
+
+      {/* Parallel Forms */}
+      <h3>{isKo ? '4. 동형검사 신뢰도 (Parallel Forms Reliability)' : '4. Parallel Forms Reliability'}</h3>
+      <p>
+        {isKo
+          ? '동일한 구성개념을 측정하도록 설계된 두 가지 동등한 형태의 검사를 동일 집단에 실시하고, 두 결과 간의 상관계수를 구합니다. 이를 동등성 계수(coefficient of equivalence)라고도 합니다. 두 개의 동등한 검사를 개발하는 것이 매우 어렵다는 실질적 한계가 있습니다.'
+          : 'Two equivalent forms of a test designed to measure the same construct are administered to the same group, and the correlation between the two sets of results is calculated. Also called the coefficient of equivalence. The practical limitation is that developing two truly equivalent test forms is extremely difficult.'}
+      </p>
+
+      {/* Factors Affecting Reliability */}
+      <h3>{isKo ? '신뢰도에 영향을 미치는 요인' : 'Factors Affecting Reliability'}</h3>
+      <ul>
+        <li><strong>{isKo ? '문항 수' : 'Number of items'}</strong>: {isKo ? '문항 수가 많을수록 신뢰도가 높아지는 경향이 있습니다 (Spearman-Brown 예언 공식).' : 'More items generally lead to higher reliability (Spearman-Brown prophecy formula).'}</li>
+        <li><strong>{isKo ? '문항의 동질성' : 'Item homogeneity'}</strong>: {isKo ? '모든 문항이 동일한 구성개념을 측정할 때 신뢰도가 높아집니다.' : 'Reliability increases when all items measure the same construct.'}</li>
+        <li><strong>{isKo ? '표본의 이질성' : 'Sample heterogeneity'}</strong>: {isKo ? '표본이 이질적(분산이 큰)일수록 신뢰도 추정치가 높아지는 경향이 있습니다.' : 'More heterogeneous samples (greater variance) tend to yield higher reliability estimates.'}</li>
+        <li><strong>{isKo ? '검사 상황' : 'Testing conditions'}</strong>: {isKo ? '표준화된 조건에서 실시할수록 무작위 오차가 줄어듭니다.' : 'Standardized administration conditions reduce random error.'}</li>
+        <li><strong>{isKo ? '문항 난이도' : 'Item difficulty'}</strong>: {isKo ? '너무 쉽거나 너무 어려운 문항은 변별력이 낮아 신뢰도를 감소시킵니다.' : 'Items that are too easy or too difficult have low discriminatory power and reduce reliability.'}</li>
+      </ul>
+
+      <TipBox type="important" title={isKo ? 'Cronbach\'s Alpha 해석 가이드라인' : 'Cronbach\'s Alpha Interpretation Guidelines'}>
+        <div className="table-responsive">
+          <table className="guide-table">
+            <thead>
+              <tr>
+                <th>{isKo ? 'Alpha 값' : 'Alpha Value'}</th>
+                <th>{isKo ? '해석' : 'Interpretation'}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>α ≥ 0.90</td><td>{isKo ? '매우 우수 (Excellent)' : 'Excellent'}</td></tr>
+              <tr><td>0.80 ≤ α &lt; 0.90</td><td>{isKo ? '우수 (Good)' : 'Good'}</td></tr>
+              <tr><td>0.70 ≤ α &lt; 0.80</td><td>{isKo ? '수용 가능 (Acceptable)' : 'Acceptable'}</td></tr>
+              <tr><td>0.60 ≤ α &lt; 0.70</td><td>{isKo ? '의문 (Questionable) — 탐색적 연구에서만 수용' : 'Questionable — acceptable only in exploratory research'}</td></tr>
+              <tr><td>0.50 ≤ α &lt; 0.60</td><td>{isKo ? '낮음 (Poor)' : 'Poor'}</td></tr>
+              <tr><td>α &lt; 0.50</td><td>{isKo ? '수용 불가 (Unacceptable)' : 'Unacceptable'}</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          {isKo
+            ? '주의: α 값이 0.95 이상으로 너무 높으면 문항 간 중복(redundancy)이 있을 수 있으므로, 일부 문항을 제거하는 것이 바람직할 수 있습니다. 또한 α는 문항 수에 영향을 받으므로, 문항이 매우 많은 척도에서는 α가 인위적으로 높게 나타날 수 있습니다.'
+            : 'Caution: If α exceeds 0.95, item redundancy may be present, and removing some items may be advisable. Additionally, α is influenced by the number of items, so scales with very many items may yield artificially high α values.'}
+        </p>
+      </TipBox>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Section 5 – Validity                                              */
+/* ------------------------------------------------------------------ */
+function ValiditySection({ isKo }: { isKo: boolean }): ReactElement {
+  return (
+    <section className="guide-section">
+      <h2 className="guide-section-title">
+        <i className="fa-solid fa-bullseye" />
+        {isKo ? '타당도' : 'Validity'}
+      </h2>
+
+      {/* What is validity */}
+      <h3>{isKo ? '타당도란 무엇인가?' : 'What Is Validity?'}</h3>
+      <p>
+        {isKo
+          ? '타당도(validity)란 측정 도구가 "측정하고자 하는 것을 실제로 정확하게 측정하고 있는가"의 정도를 의미합니다. 신뢰도가 측정의 일관성에 관한 것이라면, 타당도는 측정의 정확성에 관한 것입니다. 아무리 일관된 결과를 산출하더라도, 측정하려는 개념을 제대로 포착하지 못한다면 그 측정은 무용합니다.'
+          : 'Validity refers to the degree to which a measurement instrument accurately measures what it is intended to measure. While reliability concerns measurement consistency, validity concerns measurement accuracy. No matter how consistent the results, if the instrument fails to capture the intended concept, the measurement is useless.'}
+      </p>
+      <p>
+        {isKo
+          ? '예를 들어, 저울이 항상 실제 무게보다 2kg 더 높게 표시한다면, 이 저울은 신뢰도는 높지만(일관되게 같은 오차) 타당도는 낮습니다(정확하지 않음). 반대로, 타당도가 높으려면 반드시 어느 정도의 신뢰도가 전제되어야 합니다.'
+          : 'For example, if a scale consistently shows 2kg more than the actual weight, it has high reliability (consistent error) but low validity (inaccurate). Conversely, high validity necessarily presupposes a certain degree of reliability.'}
+      </p>
+
+      {/* Content Validity */}
+      <h3>{isKo ? '1. 내용타당도 (Content Validity)' : '1. Content Validity'}</h3>
+      <p>
+        {isKo
+          ? '측정 도구의 문항들이 측정하고자 하는 개념의 내용 영역(content domain)을 충분히 대표하고 있는지를 평가합니다. 주로 해당 분야의 전문가 판단(expert judgment)에 의해 평가되며, 통계적 수치보다는 논리적·이론적 근거에 기반합니다.'
+          : 'Assesses whether the items of an instrument adequately represent the content domain of the concept being measured. It is primarily evaluated through expert judgment in the relevant field and is based on logical and theoretical evidence rather than statistical metrics.'}
+      </p>
+      <ul>
+        <li><strong>{isKo ? '평가 방법' : 'Assessment methods'}</strong>: {isKo ? '전문가 패널 검토, 내용타당도 지수(CVI: Content Validity Index) 계산, 문항별 전문가 동의 비율 확인' : 'Expert panel review, Content Validity Index (CVI) calculation, item-level expert agreement rate'}</li>
+        <li><strong>{isKo ? '핵심 질문' : 'Key question'}</strong>: {isKo ? '"이 문항들이 측정하려는 개념의 모든 중요한 측면을 빠짐없이 포괄하고 있는가?"' : '"Do these items comprehensively cover all important facets of the concept being measured?"'}</li>
+      </ul>
+
+      {/* Criterion Validity */}
+      <h3>{isKo ? '2. 기준타당도 (Criterion Validity)' : '2. Criterion Validity'}</h3>
+      <p>
+        {isKo
+          ? '측정 결과가 외부의 객관적 기준(criterion)과 얼마나 관련되는지를 평가합니다. 외부 기준과의 시점 관계에 따라 두 가지로 구분됩니다.'
+          : 'Evaluates how well measurement results correlate with an external, objective criterion. It is divided into two types based on the temporal relationship with the external criterion.'}
+      </p>
+      <ul>
+        <li>
+          <strong>{isKo ? '동시타당도 (Concurrent Validity)' : 'Concurrent Validity'}</strong>:{' '}
+          {isKo
+            ? '측정과 기준이 동일 시점에 수집됩니다. 예: 새로 개발한 우울 척도의 점수와 기존에 검증된 BDI(Beck Depression Inventory) 점수 간의 상관관계.'
+            : 'Measurement and criterion data are collected at the same time. Example: correlation between a newly developed depression scale and the established BDI (Beck Depression Inventory).'}
+        </li>
+        <li>
+          <strong>{isKo ? '예측타당도 (Predictive Validity)' : 'Predictive Validity'}</strong>:{' '}
+          {isKo
+            ? '현재 측정이 미래의 기준을 얼마나 잘 예측하는지 평가합니다. 예: 대학 입학 시험 점수가 대학 학점(GPA)을 얼마나 잘 예측하는가.'
+            : 'Assesses how well current measurements predict future criterion values. Example: how well college entrance exam scores predict college GPA.'}
+        </li>
+      </ul>
+
+      {/* Construct Validity */}
+      <h3>{isKo ? '3. 구성타당도 (Construct Validity)' : '3. Construct Validity'}</h3>
+      <p>
+        {isKo
+          ? '측정 도구가 이론적 구성개념(construct)을 제대로 측정하고 있는지를 평가하는 가장 포괄적인 타당도 유형입니다. 구성타당도는 다음 두 가지 하위 개념으로 구성됩니다.'
+          : 'The most comprehensive type of validity, assessing whether an instrument properly measures the theoretical construct. Construct validity consists of two sub-concepts.'}
+      </p>
+      <ul>
+        <li>
+          <strong>{isKo ? '수렴타당도 (Convergent Validity)' : 'Convergent Validity'}</strong>:{' '}
+          {isKo
+            ? '동일하거나 유사한 구성개념을 측정하는 다른 도구들과 높은 상관관계를 보여야 합니다. 예: 새로운 자존감 척도가 기존의 Rosenberg 자존감 척도와 높은 정적 상관을 보이는 경우.'
+            : 'The instrument should show high correlation with other instruments measuring the same or similar constructs. Example: a new self-esteem scale showing strong positive correlation with the established Rosenberg Self-Esteem Scale.'}
+        </li>
+        <li>
+          <strong>{isKo ? '판별타당도 (Discriminant Validity)' : 'Discriminant Validity'}</strong>:{' '}
+          {isKo
+            ? '이론적으로 다른 구성개념을 측정하는 도구들과는 낮은 상관관계를 보여야 합니다. 예: 자존감 척도가 수학 능력 척도와는 낮은 상관을 보이는 경우.'
+            : 'The instrument should show low correlation with instruments measuring theoretically different constructs. Example: a self-esteem scale showing low correlation with a mathematical ability scale.'}
+        </li>
+      </ul>
+      <p>
+        {isKo
+          ? 'Campbell과 Fiske(1959)의 다특질-다방법 행렬(MTMM: Multi-Trait Multi-Method Matrix)은 수렴타당도와 판별타당도를 동시에 검증하는 고전적 방법입니다. 최근에는 확인적 요인분석(CFA)이나 구조방정식 모형(SEM)을 통해 구성타당도를 검증하는 것이 일반적입니다.'
+          : 'Campbell and Fiske\'s (1959) Multi-Trait Multi-Method Matrix (MTMM) is a classical method for simultaneously testing convergent and discriminant validity. Currently, confirmatory factor analysis (CFA) and structural equation modeling (SEM) are the standard approaches for assessing construct validity.'}
+      </p>
+
+      {/* Face Validity */}
+      <h3>{isKo ? '4. 표면타당도 (Face Validity)' : '4. Face Validity'}</h3>
+      <p>
+        {isKo
+          ? '측정 도구가 겉으로 보기에 측정하려는 것을 측정하는 것처럼 보이는지의 정도입니다. 전문적인 검증이 아닌, 일반인이나 응답자가 느끼는 주관적 판단에 기반합니다. 엄밀한 의미에서 "진정한 타당도"로 간주되지는 않지만, 응답자의 협조와 동기를 유지하는 데 중요한 역할을 합니다.'
+          : 'The degree to which an instrument appears, on the surface, to measure what it is supposed to measure. It is based on subjective judgment by laypersons or respondents rather than professional verification. While not considered "true validity" in a strict sense, it plays an important role in maintaining respondent cooperation and motivation.'}
+      </p>
+
+      {/* Relationship between Reliability and Validity */}
+      <h3>{isKo ? '신뢰도와 타당도의 관계' : 'Relationship Between Reliability and Validity'}</h3>
+      <p>
+        {isKo
+          ? '신뢰도와 타당도는 서로 독립적이지 않습니다. 핵심 원칙은 다음과 같습니다.'
+          : 'Reliability and validity are not independent of each other. The key principles are as follows.'}
+      </p>
+      <ul>
+        <li>{isKo ? '신뢰도는 타당도의 필요조건이지만, 충분조건은 아닙니다.' : 'Reliability is necessary but not sufficient for validity.'}</li>
+        <li>{isKo ? '타당한 측정은 반드시 신뢰할 수 있지만, 신뢰할 수 있는 측정이 반드시 타당하지는 않습니다.' : 'A valid measurement is necessarily reliable, but a reliable measurement is not necessarily valid.'}</li>
+        <li>{isKo ? '타당도의 상한은 신뢰도의 제곱근입니다: 타당도 ≤ √신뢰도.' : 'The upper bound of validity is the square root of reliability: Validity ≤ √Reliability.'}</li>
+      </ul>
+      <p>
+        {isKo
+          ? '과녁에 비유하면, 신뢰도는 화살이 한 곳에 모여 있는 정도(정밀도)이고, 타당도는 화살이 과녁 중심에 맞는 정도(정확도)입니다. 화살이 흩어져 있으면(낮은 신뢰도) 과녁 중심에 맞을 수 없지만(낮은 타당도), 한 곳에 모여 있어도(높은 신뢰도) 과녁 밖이면(낮은 타당도) 의미가 없습니다.'
+          : 'Using a target analogy, reliability is how tightly the arrows are clustered (precision), while validity is how close the arrows are to the bullseye (accuracy). If arrows are scattered (low reliability), they cannot hit the bullseye (low validity). But even if tightly clustered (high reliability), if they miss the bullseye (low validity), the measurement is meaningless.'}
+      </p>
+
+      <TipBox type="important" title={isKo ? '타당도는 신뢰도보다 중요합니다' : 'Validity Is More Important Than Reliability'}>
+        <p>
+          {isKo
+            ? '연구에서 신뢰도에만 집중하고 타당도를 소홀히 하는 것은 위험합니다. Cronbach\'s alpha가 아무리 높아도, 측정 도구가 의도한 구성개념을 실제로 포착하지 못한다면 연구 결과 전체가 무의미해집니다. 예를 들어, "창의성"을 측정한다고 했는데 실제로는 "언어 능력"을 측정하고 있다면, 높은 신뢰도는 오히려 잘못된 결론을 더 확신하게 만들 수 있습니다. 항상 "내 도구가 정말 의도한 것을 측정하고 있는가?"를 먼저 확인하십시오.'
+            : 'Focusing solely on reliability while neglecting validity is dangerous. No matter how high the Cronbach\'s alpha, if the instrument fails to capture the intended construct, the entire study becomes meaningless. For example, if you claim to measure "creativity" but actually measure "verbal ability," high reliability only reinforces incorrect conclusions. Always verify first: "Is my instrument truly measuring what I intend?"'}
+        </p>
+      </TipBox>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Section 6 – Instrument Development                                */
+/* ------------------------------------------------------------------ */
+function DevelopmentSection({ isKo }: { isKo: boolean }): ReactElement {
+  return (
+    <section className="guide-section">
+      <h2 className="guide-section-title">
+        <i className="fa-solid fa-wrench" />
+        {isKo ? '측정도구 개발' : 'Instrument Development'}
+      </h2>
+
+      <p>
+        {isKo
+          ? '좋은 측정도구는 연구의 성패를 좌우합니다. 기존의 검증된 도구가 있다면 이를 활용하는 것이 바람직하지만, 연구 목적에 부합하는 도구가 없거나 새로운 개념을 측정해야 할 때는 체계적인 절차에 따라 새로운 도구를 개발해야 합니다. DeVellis(2016)와 Netemeyer 등(2003)의 가이드라인에 따른 단계별 개발 과정을 소개합니다.'
+          : 'A good measurement instrument determines the success or failure of research. While using established validated instruments is advisable, when no suitable instrument exists or a new concept needs to be measured, a new instrument must be developed following systematic procedures. Below is a step-by-step development process based on the guidelines of DeVellis (2016) and Netemeyer et al. (2003).'}
+      </p>
+
+      {/* Step 1: Conceptualization */}
+      <h3>{isKo ? '1단계: 구성개념 정의 및 문헌 검토' : 'Step 1: Construct Definition and Literature Review'}</h3>
+      <p>
+        {isKo
+          ? '측정하고자 하는 구성개념을 명확히 정의하는 것에서 시작합니다. 해당 개념에 대한 기존 이론과 선행연구를 체계적으로 검토하여, 개념의 차원(dimensions), 하위 요인(sub-factors), 경계(boundaries)를 파악합니다. 유사 개념과의 차별점을 명확히 하고, 조작적 정의를 수립합니다.'
+          : 'Begin by clearly defining the construct to be measured. Systematically review existing theories and prior research to identify the concept\'s dimensions, sub-factors, and boundaries. Clarify distinctions from similar concepts and establish operational definitions.'}
+      </p>
+      <ul>
+        <li>{isKo ? '관련 이론 및 모형 검토' : 'Review related theories and models'}</li>
+        <li>{isKo ? '기존 측정도구 분석 및 문항 풀(item pool) 참고' : 'Analyze existing instruments and reference item pools'}</li>
+        <li>{isKo ? '개념의 차원성(unidimensional vs. multidimensional) 결정' : 'Determine dimensionality (unidimensional vs. multidimensional)'}</li>
+      </ul>
+
+      {/* Step 2: Item Generation */}
+      <h3>{isKo ? '2단계: 문항 생성' : 'Step 2: Item Generation'}</h3>
+      <p>
+        {isKo
+          ? '문헌 검토, 전문가 자문, 포커스 그룹 인터뷰, 기존 척도 분석 등 다양한 방법을 통해 초기 문항 풀(item pool)을 생성합니다. 최종 척도에 포함될 문항 수의 2~3배 이상을 작성하는 것이 권장됩니다.'
+          : 'Generate an initial item pool through multiple methods: literature review, expert consultation, focus group interviews, and analysis of existing scales. It is recommended to create 2–3 times more items than will be included in the final scale.'}
+      </p>
+      <ul>
+        <li>{isKo ? '한 문항에 하나의 개념만 포함 (이중부정, 이중질문 금지)' : 'One concept per item (avoid double negatives and double-barreled questions)'}</li>
+        <li>{isKo ? '긍정형과 부정형(역코딩) 문항을 균형 있게 포함' : 'Include a balanced mix of positively and negatively (reverse-coded) worded items'}</li>
+        <li>{isKo ? '대상 집단의 언어 수준에 적합한 표현 사용' : 'Use language appropriate for the target population\'s literacy level'}</li>
+        <li>{isKo ? '모호하거나 추상적인 표현 지양' : 'Avoid ambiguous or overly abstract wording'}</li>
+      </ul>
+
+      {/* Step 3: Expert Review */}
+      <h3>{isKo ? '3단계: 전문가 검토 및 내용타당도 평가' : 'Step 3: Expert Review and Content Validity Assessment'}</h3>
+      <p>
+        {isKo
+          ? '해당 분야의 전문가 패널(보통 5~10명)에게 각 문항의 적절성, 명확성, 대표성을 평가받습니다. 내용타당도 지수(CVI)를 계산하여 기준에 미달하는 문항을 수정하거나 제거합니다. 전문가 피드백을 반영하여 문항을 수정하고, 필요시 새 문항을 추가합니다.'
+          : 'Have an expert panel (typically 5–10 experts) evaluate each item for relevance, clarity, and representativeness. Calculate the Content Validity Index (CVI) and revise or remove items that fall below the threshold. Incorporate expert feedback to refine items and add new ones if necessary.'}
+      </p>
+
+      {/* Step 4: Pilot Testing */}
+      <h3>{isKo ? '4단계: 예비조사(Pilot Test) 및 문항 분석' : 'Step 4: Pilot Testing and Item Analysis'}</h3>
+      <p>
+        {isKo
+          ? '소규모 표본(보통 50~100명)을 대상으로 예비조사를 실시합니다. 수집된 자료를 바탕으로 문항 분석을 수행합니다.'
+          : 'Conduct a pilot test with a small sample (typically 50–100 participants). Perform item analysis based on the collected data.'}
+      </p>
+      <ul>
+        <li><strong>{isKo ? '문항-총점 상관(item-total correlation)' : 'Item-total correlation'}</strong>: {isKo ? 'r ≥ 0.30 이상인 문항 유지' : 'Retain items with r ≥ 0.30'}</li>
+        <li><strong>{isKo ? '문항 제거 시 α 변화' : 'Alpha-if-item-deleted'}</strong>: {isKo ? '특정 문항 제거 시 α가 상승하면 해당 문항 제거 고려' : 'Consider removing items whose deletion would increase alpha'}</li>
+        <li><strong>{isKo ? '응답 분포 확인' : 'Response distribution'}</strong>: {isKo ? '극단적으로 편중된 문항(천장/바닥 효과) 점검' : 'Check for extremely skewed items (ceiling/floor effects)'}</li>
+        <li><strong>{isKo ? '응답 시간 및 이해도' : 'Response time and comprehension'}</strong>: {isKo ? '응답자가 문항을 이해하는 데 어려움이 없었는지 확인' : 'Verify that respondents had no difficulty understanding the items'}</li>
+      </ul>
+
+      {/* Step 5: Factor Analysis */}
+      <h3>{isKo ? '5단계: 요인분석을 통한 구성타당도 검증' : 'Step 5: Factor Analysis for Construct Validation'}</h3>
+      <p>
+        {isKo
+          ? '충분한 표본(보통 200명 이상, 또는 문항 수의 5~10배)을 대상으로 본조사를 실시하고, 요인분석을 통해 척도의 요인 구조를 검증합니다.'
+          : 'Conduct the main survey with an adequate sample (typically 200+ participants, or 5–10 times the number of items) and verify the factor structure through factor analysis.'}
+      </p>
+      <ul>
+        <li><strong>{isKo ? '탐색적 요인분석(EFA)' : 'Exploratory Factor Analysis (EFA)'}</strong>: {isKo ? '자료에서 잠재적 요인 구조를 탐색합니다. KMO ≥ 0.60, Bartlett 구형성 검정 유의, 고유값(eigenvalue) > 1.0 기준을 사용합니다. 요인 부하량(factor loading) ≥ 0.40인 문항을 유지합니다.' : 'Explores latent factor structures in the data. Use criteria of KMO ≥ 0.60, significant Bartlett\'s test of sphericity, and eigenvalues > 1.0. Retain items with factor loadings ≥ 0.40.'}</li>
+        <li><strong>{isKo ? '확인적 요인분석(CFA)' : 'Confirmatory Factor Analysis (CFA)'}</strong>: {isKo ? '이론에 기반한 요인 구조가 자료에 적합한지 확인합니다. 적합도 지수(CFI ≥ 0.90, RMSEA ≤ 0.08, SRMR ≤ 0.08)를 확인합니다.' : 'Confirms whether the theory-based factor structure fits the data. Check fit indices (CFI ≥ 0.90, RMSEA ≤ 0.08, SRMR ≤ 0.08).'}</li>
+      </ul>
+      <p>
+        {isKo
+          ? '이상적으로는 EFA와 CFA를 별도의 표본에서 실시하는 교차 타당화(cross-validation)가 권장됩니다. 하나의 표본을 무작위로 분할하여 EFA 표본과 CFA 표본으로 나누는 방법도 사용됩니다.'
+          : 'Ideally, cross-validation is recommended, conducting EFA and CFA on separate samples. Alternatively, a single sample can be randomly split into EFA and CFA sub-samples.'}
+      </p>
+
+      {/* Step 6: Refinement */}
+      <h3>{isKo ? '6단계: 문항 정련 및 최종 확정' : 'Step 6: Item Refinement and Finalization'}</h3>
+      <p>
+        {isKo
+          ? '요인분석 결과와 신뢰도 분석 결과를 종합하여 최종 문항을 확정합니다. 불량 문항을 제거하고, 각 하위 요인에 적절한 수의 문항이 배정되도록 조정합니다. 최종 척도에 대해 신뢰도(Cronbach\'s alpha), 수렴타당도, 판별타당도를 재검증합니다.'
+          : 'Finalize items by synthesizing factor analysis and reliability analysis results. Remove poor items and ensure each sub-factor has an appropriate number of items. Re-verify reliability (Cronbach\'s alpha), convergent validity, and discriminant validity for the final scale.'}
+      </p>
+
+      {/* Step 7: Documentation */}
+      <h3>{isKo ? '7단계: 문서화 및 보고' : 'Step 7: Documentation and Reporting'}</h3>
+      <p>
+        {isKo
+          ? '측정도구 개발의 전 과정을 체계적으로 문서화합니다. 이는 연구의 투명성과 재현 가능성을 보장하는 핵심 단계입니다. 논문이나 보고서에 다음 내용을 반드시 포함해야 합니다.'
+          : 'Systematically document the entire instrument development process. This is a critical step for ensuring research transparency and reproducibility. The following must be included in papers or reports.'}
+      </p>
+      <ul>
+        <li>{isKo ? '구성개념의 정의와 이론적 배경' : 'Construct definition and theoretical background'}</li>
+        <li>{isKo ? '문항 생성 과정과 출처' : 'Item generation process and sources'}</li>
+        <li>{isKo ? '전문가 검토 결과 (CVI 등)' : 'Expert review results (CVI, etc.)'}</li>
+        <li>{isKo ? '표본 특성과 자료수집 절차' : 'Sample characteristics and data collection procedures'}</li>
+        <li>{isKo ? '요인분석 결과 (요인 부하량, 적합도 지수)' : 'Factor analysis results (factor loadings, fit indices)'}</li>
+        <li>{isKo ? '신뢰도 및 타당도 검증 결과' : 'Reliability and validity evidence'}</li>
+        <li>{isKo ? '최종 척도 문항 전문' : 'Full text of final scale items'}</li>
+      </ul>
+
+      <TipBox title={isKo ? '측정도구 개발 실무 체크리스트' : 'Practical Checklist for Instrument Development'}>
+        <ul>
+          <li>{isKo ? '구성개념이 명확하게 정의되었는가?' : 'Is the construct clearly defined?'}</li>
+          <li>{isKo ? '충분한 문헌 검토를 수행했는가?' : 'Has a thorough literature review been conducted?'}</li>
+          <li>{isKo ? '초기 문항 수가 최종 문항의 2~3배 이상인가?' : 'Is the initial item pool 2–3 times the final number of items?'}</li>
+          <li>{isKo ? '전문가 패널의 내용타당도 검토를 받았는가?' : 'Has content validity been reviewed by an expert panel?'}</li>
+          <li>{isKo ? '예비조사를 통해 문항 분석을 수행했는가?' : 'Has item analysis been performed through pilot testing?'}</li>
+          <li>{isKo ? '요인분석을 위한 충분한 표본 크기를 확보했는가?' : 'Has an adequate sample size been secured for factor analysis?'}</li>
+          <li>{isKo ? 'EFA와 CFA를 별도 표본에서 실시했는가?' : 'Were EFA and CFA conducted on separate samples?'}</li>
+          <li>{isKo ? '신뢰도(α ≥ 0.70)가 확보되었는가?' : 'Has reliability (α ≥ 0.70) been achieved?'}</li>
+          <li>{isKo ? '수렴타당도와 판별타당도가 검증되었는가?' : 'Have convergent and discriminant validity been verified?'}</li>
+          <li>{isKo ? '전체 개발 과정이 체계적으로 문서화되었는가?' : 'Has the entire development process been systematically documented?'}</li>
+        </ul>
+      </TipBox>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Main Page Component                                               */
+/* ------------------------------------------------------------------ */
+export default function Measurement(): ReactElement {
+  const { language } = useLanguage();
+  const [activeSection, setActiveSection] = useState('concept');
+  const isKo = language === 'ko';
+  const currentIndex = SECTIONS.findIndex((s) => s.id === activeSection);
+
+  const handlePrev = () => {
+    if (currentIndex > 0) {
+      setActiveSection(SECTIONS[currentIndex - 1].id);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+  const handleNext = () => {
+    if (currentIndex < SECTIONS.length - 1) {
+      setActiveSection(SECTIONS[currentIndex + 1].id);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+  const handleNavClick = (id: string) => {
+    setActiveSection(id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return (
+    <>
+      <SEOHead
+        title={isKo ? '측정과 척도 | Research Master' : 'Measurement & Scales | Research Master'}
+        description={
+          isKo
+            ? '측정 수준, 척도 유형, 신뢰도와 타당도의 개념을 체계적으로 학습합니다.'
+            : 'Learn measurement levels, scale types, reliability and validity systematically.'
+        }
+      />
+      <div className="guide-page">
+        <div className="guide-layout">
+          <aside className="guide-sidebar">
+            <div className="guide-sidebar-title">{isKo ? '목차' : 'Contents'}</div>
+            <ul className="guide-nav">
+              {SECTIONS.map((section) => (
+                <li key={section.id} className="guide-nav-item">
+                  <button
+                    className={`guide-nav-link ${activeSection === section.id ? 'active' : ''}`}
+                    onClick={() => handleNavClick(section.id)}
+                  >
+                    <i className={`fa-solid ${section.icon}`} />
+                    <span>{isKo ? section.ko : section.en}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </aside>
+          <main className="guide-content">
+            {activeSection === 'concept' && <ConceptSection isKo={isKo} />}
+            {activeSection === 'levels' && <LevelsSection isKo={isKo} />}
+            {activeSection === 'scales' && <ScalesSection isKo={isKo} />}
+            {activeSection === 'reliability' && <ReliabilitySection isKo={isKo} />}
+            {activeSection === 'validity' && <ValiditySection isKo={isKo} />}
+            {activeSection === 'development' && <DevelopmentSection isKo={isKo} />}
+
+            <div className="guide-section-nav">
+              <button className="guide-nav-btn prev" onClick={handlePrev} disabled={currentIndex === 0}>
+                <i className="fa-solid fa-arrow-left" />
+                <span>
+                  {currentIndex > 0
+                    ? isKo
+                      ? SECTIONS[currentIndex - 1].ko
+                      : SECTIONS[currentIndex - 1].en
+                    : isKo
+                      ? '이전'
+                      : 'Previous'}
+                </span>
+              </button>
+              <button
+                className="guide-nav-btn next"
+                onClick={handleNext}
+                disabled={currentIndex === SECTIONS.length - 1}
+              >
+                <span>
+                  {currentIndex < SECTIONS.length - 1
+                    ? isKo
+                      ? SECTIONS[currentIndex + 1].ko
+                      : SECTIONS[currentIndex + 1].en
+                    : isKo
+                      ? '다음'
+                      : 'Next'}
+                </span>
+                <i className="fa-solid fa-arrow-right" />
+              </button>
+            </div>
+          </main>
+        </div>
+      </div>
+    </>
+  );
+}
